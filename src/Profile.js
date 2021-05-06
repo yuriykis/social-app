@@ -4,7 +4,7 @@ import { Actions } from 'react-native-router-flux'
 
 const Profile = () => {
   const goToHome = () => {
-    Actions.login()
+    Actions.main()
   }
   return (
     <TouchableOpacity style={{ margin: 128 }} onPress={goToHome}>

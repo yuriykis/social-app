@@ -1,6 +1,6 @@
 import React from 'react'
 import { Router, Scene } from 'react-native-router-flux'
-import Main from './src/Main'
+import Login from './src/Login'
 import Profile from './src/Profile'
 
 const Routes = () => (
@@ -8,11 +8,17 @@ const Routes = () => (
     <Scene key="root">
       <Scene
         key="main"
-        component={Main}
+        component={Login}
         title="Main"
         initial={true}
+        hideNavBar={true}
       />
-      <Scene key="profile" component={Profile} title="Profile" />
+      <Scene
+        key="profile"
+        component={Profile}
+        title="Your Profile"
+        back
+      />
     </Scene>
   </Router>
 )

@@ -7,6 +7,7 @@ import {
   Alert,
   StyleSheet
 } from 'react-native'
+import { Actions } from 'react-native-router-flux'
 
 export const Login = ({ onSubmit }) => {
   const [username, setUsername] = useState('')
@@ -17,8 +18,10 @@ export const Login = ({ onSubmit }) => {
       // onSubmit(value)
       setUsername('')
       setPassword('')
+      Actions.profile()
     } else {
-      Alert.alert('Credentials cannot be empty!')
+      Actions.profile()
+      //Alert.alert('Credentials cannot be empty!')
     }
   }
   return (

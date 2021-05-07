@@ -8,17 +8,24 @@ import {
   StyleSheet
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
+import { loginToTheApplication } from '../services/api'
+import { useSelector, useDispatch } from 'react-redux'
+import { login } from '../store/auth'
 
 export const LoginForm = ({ onSubmit }) => {
+  const count = useSelector((state) => state.auth.loggedIn)
+  const dispatch = useDispatch()
+
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
 
-  const submitCredentials = () => {
+  const submitCredentials = async () => {
     if (username.trim() && password.trim()) {
       // onSubmit(value)
       setUsername('')
       setPassword('')
-      Actions.profile()
+      dispatch(login(username, password))
+      // Actions.profile()
     } else {
       Alert.alert('Credentials cannot be empty!')
     }

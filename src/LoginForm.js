@@ -20,8 +20,7 @@ export const LoginForm = ({ onSubmit }) => {
       setPassword('')
       Actions.profile()
     } else {
-      Actions.profile()
-      //Alert.alert('Credentials cannot be empty!')
+      Alert.alert('Credentials cannot be empty!')
     }
   }
   return (

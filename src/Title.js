@@ -1,17 +1,24 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
-export const Navbar = () => {
-  return <View style={styles.navbar}></View>
+export const Title = ({ title }) => {
+  return (
+    <View style={styles.title}>
+      <Text style={styles.text}>{title}</Text>
+    </View>
+  )
 }
 
 const styles = StyleSheet.create({
-  navbar: {
+  title: {
     height: 50,
     alignItems: 'center',
     justifyContent: 'flex-end',
     backgroundColor: '#3949ab',
     paddingBottom: 10
+  },
+  text: {
+    color: 'white',
+    fontSize: 20
   }
 })

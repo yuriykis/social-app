@@ -6,8 +6,13 @@ export async function login(username, password) {
     const res = await loginToTheApplication(username, password)
     const tokens = res.data
     await tokenService.setAsyncStorageTokens(tokens)
+    return true
   } catch (error) {
     await tokenService.removeAsyncStorageTokens()
-    state.loggedIn = false
+    return false
   }
+}
+
+export async function logout() {
+  await tokenService.removeAsyncStorageTokens()
 }

@@ -5,16 +5,16 @@ import {
   TextInput,
   Button,
   Alert,
-  StyleSheet
+  StyleSheet,
+  FlatList
 } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 import { useSelector, useDispatch } from 'react-redux'
 import { login } from '../features/auth'
-import { setUserlogin, unsetUserlogin } from '../store/authSlice'
+import { setUserlogin } from '../store/authSlice'
 import Loaders from 'react-native-pure-loaders'
 
 export const LoginForm = ({ onSubmit }) => {
-  const isUserLoggedIn = useSelector((state) => state.auth.loggedIn)
   const dispatch = useDispatch()
 
   const [username, setUsername] = useState('')
@@ -28,11 +28,11 @@ export const LoginForm = ({ onSubmit }) => {
       // onSubmit(value)
       setUsername('')
       setPassword('')
-      try {
-        await login(username, password)
+      const loginOk = await login(username, password)
+      if (loginOk) {
         dispatch(setUserlogin())
-        Actions.profile()
-      } catch (error) {
+        Actions.home()
+      } else {
         Alert.alert('Login failed. Please try again')
       }
     } else {

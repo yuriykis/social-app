@@ -1,14 +1,15 @@
 import React from 'react'
 import { Router, Scene } from 'react-native-router-flux'
-import Login from './src/Login'
+import Main from './src/Main'
 import Profile from './src/Profile'
+import Home from './src/Home'
 
 const Routes = () => (
   <Router>
     <Scene key="root">
       <Scene
         key="main"
-        component={Login}
+        component={Main}
         title="Main"
         initial={true}
         hideNavBar={true}
@@ -19,6 +20,7 @@ const Routes = () => (
         title="Your Profile"
         back
       />
+      <Scene key="home" component={Home} hideNavBar={true} />
     </Scene>
   </Router>
 )

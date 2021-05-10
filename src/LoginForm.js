@@ -22,6 +22,9 @@ export const LoginForm = ({ onSubmit }) => {
 
   const [loading, setLoading] = useState(false)
 
+  const goToRegister = () => {
+    Actions.register()
+  }
   const submitCredentials = async () => {
     setLoading(true)
     if (username.trim() && password.trim()) {
@@ -67,6 +70,14 @@ export const LoginForm = ({ onSubmit }) => {
           title={'Login'}
           style={styles.input}
           onPress={submitCredentials}
+        />
+        <Text style={{ marginTop: 40, marginBottom: 10 }}>
+          Dont have an account yet?
+        </Text>
+        <Button
+          title={'Sign Up'}
+          style={styles.input}
+          onPress={goToRegister}
         />
       </View>
     )

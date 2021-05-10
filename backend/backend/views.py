@@ -2,10 +2,28 @@ from rest_framework.views import APIView
 from django.http import HttpResponse
 from rest_framework import status
 from rest_framework.permissions import AllowAny, IsAuthenticated
+from django.contrib.auth.models import User
 
 
 class Test(APIView):
     permission_classes = (AllowAny,)
 
-    def get(sekf, request):
+    def get(self, request):
+        return HttpResponse(status=status.HTTP_200_OK)
+
+
+class Register(APIView):
+    permission_classes = (AllowAny,)
+
+    def post(self, request):
+        username = request.data.get('username')
+        password = request.data.get('password')
+        firstName = request.data.get('firstName')
+        lastName = request.data.get('lastName')
+        age = request.data.get('age')
+        gender = request.data.get('gender')
+
+        user = User(username=username, password=password,
+                    first_name=firstName, last_name=lastName)
+        user.save()
         return HttpResponse(status=status.HTTP_200_OK)

@@ -23,3 +23,7 @@ export async function loginToTheApplication(login, password) {
     password: password
   })
 }
+
+export async function registerInTheApplication(userData) {
+  return api.post('api/register', userData)
+}

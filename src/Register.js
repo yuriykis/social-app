@@ -52,7 +52,7 @@ const Register = ({ onSubmit }) => {
       if (registerOk) {
         Actions.main()
       } else {
-        Alert.alert('Register failed. Please try again')
+        Alert.alert('Registration failed. Please try again')
       }
     } else {
       Alert.alert('User data cannot be empty')

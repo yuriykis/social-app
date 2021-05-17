@@ -23,7 +23,7 @@ class Register(APIView):
         age = request.data.get('age')
         gender = request.data.get('gender')
 
-        user = User(username=username, password=password,
-                    first_name=firstName, last_name=lastName)
+        user = User.objects.create_user(username=username, password=password,
+                                        first_name=firstName, last_name=lastName)
         user.save()
         return HttpResponse(status=status.HTTP_200_OK)

@@ -16,14 +16,19 @@ class Register(APIView):
     permission_classes = (AllowAny,)
 
     def post(self, request):
-        username = request.data.get('username')
-        password = request.data.get('password')
-        firstName = request.data.get('firstName')
-        lastName = request.data.get('lastName')
-        age = request.data.get('age')
-        gender = request.data.get('gender')
+        try:
+            username = request.data.get('username')
+            password = request.data.get('password')
+            firstName = request.data.get('firstName')
+            lastName = request.data.get('lastName')
 
-        user = User.objects.create_user(username=username, password=password,
-                                        first_name=firstName, last_name=lastName)
-        user.save()
-        return HttpResponse(status=status.HTTP_200_OK)
+            # should be used when the default user is overridden
+            age = request.data.get('age')
+            gender = request.data.get('gender')
+
+            user = User.objects.create_user(username=username, password=password,
+                                            first_name=firstName, last_name=lastName)
+            user.save()
+            return HttpResponse(status=status.HTTP_200_OK)
+        except:
+            return HttpResponse(status=status.HTTP_400_BAD_REQUEST)

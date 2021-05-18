@@ -22,6 +22,9 @@ const Home = () => {
     Actions.main()
     setLoading(false)
   }
+  const goToProfile = () => {
+    Actions.profile()
+  }
   if (loading) {
     return (
       <View style={styles.container}>
@@ -37,6 +40,12 @@ const Home = () => {
           onPress={logoutFromApp}
         >
           <Text>Logout</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{ margin: 10 }}
+          onPress={goToProfile}
+        >
+          <Text>Profile</Text>
         </TouchableOpacity>
       </View>
     )

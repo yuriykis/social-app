@@ -4,6 +4,7 @@ import Main from './src/Main'
 import Profile from './src/Profile'
 import Home from './src/Home'
 import Register from './src/Register'
+import Posts from './src/Posts'
 
 const Routes = () => (
   <Router>
@@ -28,6 +29,12 @@ const Routes = () => (
         back
       />
       <Scene key="home" component={Home} hideNavBar={true} />
+      <Scene
+        key="posts"
+        component={Posts}
+        title="Your Posts"
+        back
+      />
     </Scene>
   </Router>
 )

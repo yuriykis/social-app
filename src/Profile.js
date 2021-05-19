@@ -26,9 +26,9 @@ const Profile = () => {
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
-        <Text style={styles.userName}>Robert Lewandowski</Text>
+        <Text style={styles.userName}>Robert Nowak</Text>
         <Text style={styles.aboutUser}>
-          {'Cześć! jestem Robertino Lewandowski. Lubię kopać w piłkę i jeść bezglutenową papkę od Ani'}
+          {'Cześć! jestem Robert Nowak. Lubię grać w piłkę nożną, interesuję się motoryzacją oraz zbieraniem znaczków pocztowych'}
         </Text>
         <View style={styles.userInfoWrapper}>
           <View style={styles.userInfoItem}>

@@ -28,6 +28,7 @@ const Home = () => {
 
     .then(resp => resp.json())
     .then(postsData => {
+      postsData.reverse()
       setPostsData(postsData)
     })
     .catch(error => Alert.alert('error', error))
@@ -67,8 +68,9 @@ const Home = () => {
     );
   } else {
     return (
-      <SafeAreaView style={styles.container}>
+      <View style={styles.container}>
           <FlatList
+            style={{flex: 1}}
             data={postsData}
             renderItem = {({item}) => {
               return renderPost(item)
@@ -76,7 +78,7 @@ const Home = () => {
             keyExtractor = {item => `${item.id}`}
           />
          
-        <View style={styles.settings}>
+        <View style={styles.footer}>
         <TouchableOpacity
           style={{ margin: 10 }}
           onPress={logoutFromApp}
@@ -96,7 +98,7 @@ const Home = () => {
           onPress = {goToPosts}
         />
         </View>
-      </SafeAreaView>
+      </View>
     );
   }
 }
@@ -105,7 +107,7 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
   },
-  settings: {
+  footer: {
     alignItems: 'center',
     justifyContent: 'center'
   },

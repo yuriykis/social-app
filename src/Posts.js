@@ -3,15 +3,31 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
-  TextInput,
   Dimensions,
   ScrollView,
   Platform,
 } from "react-native";
-import { Icon, Header, Button, Avatar, Image } from "react-native-elements";
+import { Icon, Header, Avatar, Image, Button } from "react-native-elements";
 import { Actions } from 'react-native-router-flux'
+import { TextInput } from 'react-native-paper'
 
 const Posts = () => {
+  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
+
+  const addPost = () => {
+    fetch('http://192.168.1.253:8000/api/posts/', {
+      method: 'POST',
+      headers: {
+        'Content-Type' : 'application/json'
+      },
+      body: JSON.stringify({title, content})
+    })
+    .then(resp => resp.json())
+    .then(data =>{
+      Actions.home()
+    })
+  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputContainer}>
@@ -24,19 +40,24 @@ const Posts = () => {
             }}
           />
         </View>
-        <View style={styles.textInput}>
           <TextInput
-            style={styles.input}
+            label = 'title'
+            mode = 'outlined'
+            style={styles.titleStyle}
             autoFocus={true}
-            placeholder="What's Happening?"
-            multiline={true}
-            numberOfLines={4}
+            onChangeText = {text => setTitle(text)}
+
           />
-        </View>
+          <TextInput
+            label = 'content'
+            mode = 'outlined'
+            style={styles.contentStyle}
+            onChangeText = {text => setContent(text)}
+
+          />
       </View>
-      <View style={{ flex: 1, marginTop: 100}}>
-        <View style={styles.attachment}>
-          <Icon
+      <View style={{ flex: 1, margin: 30}}>
+          {/* <Icon
             name="image"
             type="evilicon"
             color="#517fa4"
@@ -63,12 +84,13 @@ const Posts = () => {
             color="#517fa4"
             containerStyle={styles.icon}
             size={40}
-          />
+          /> */}
           <Button
-            title="Submit"
+          title="SUBMIT"
+          type="outline"
+          onPress = {() => addPost()}
           />
         </View>
-      </View>
     </ScrollView>
   );
 }
@@ -78,31 +100,25 @@ const styles = StyleSheet.create({
   container: { flex: 1 },
   inputContainer: {
     flex: 1,
-    flexDirection: "row",
   },
   avatar: {
     margin: 20,
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   button: {
     color: "#1DA1F2",
     borderRadius: 50,
     width: 80,
   },
-  textInput: {
-    flex: 1,
-    fontSize: 30,
-    marginRight: 10,
+  titleStyle: {
+    padding: 10,
+    margin: 10,
   },
-  input: {
-    fontSize: 20,
-  },
-  attachment: {
-    flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    position: "absolute",
-    bottom: 0,
-    marginBottom: 10,
+  contentStyle: {
+    padding: 10,
+    margin: 10,
+    height: 100,
   },
   icon: {
     marginRight: 20,

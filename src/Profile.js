@@ -11,9 +11,6 @@ import {
 import { Actions } from 'react-native-router-flux'
 
 const Profile = () => {
-  const goToPosts = () => {
-    Actions.posts()
-  }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView
@@ -32,12 +29,9 @@ const Profile = () => {
         </Text>
         <View style={styles.userInfoWrapper}>
           <View style={styles.userInfoItem}>
-            <TouchableOpacity
-              onPress={goToPosts}
-            >
-              <Text style={styles.userInfoTitle}>{1000}</Text>
-              <Text style={styles.userInfoSubTitle}>Posts</Text>
-            </TouchableOpacity>
+
+            <Text style={styles.userInfoTitle}>{1000}</Text>
+            <Text style={styles.addPost}>Posts</Text>
 
           </View>
           <View style={styles.userInfoItem}>
@@ -86,6 +80,11 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   userInfoSubTitle: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  addPost: {
     fontSize: 12,
     color: '#666',
     textAlign: 'center',

@@ -9,6 +9,7 @@ import {
   Platform,
 } from "react-native";
 import { Icon, Header, Button, Avatar, Image } from "react-native-elements";
+import { Actions } from 'react-native-router-flux'
 
 const Posts = () => {
   return (
@@ -62,6 +63,9 @@ const Posts = () => {
             color="#517fa4"
             containerStyle={styles.icon}
             size={40}
+          />
+          <Button
+            title="Submit"
           />
         </View>
       </View>

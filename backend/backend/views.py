@@ -5,7 +5,7 @@ from rest_framework.permissions import AllowAny, IsAuthenticated
 from rest_framework.response import Response
 from django.contrib.auth.models import User
 from .models import Posts
-from .serializers import PostsSerializer
+from .serializers import PostsSerializer, UserSerializer
 
 class Test(APIView):
     permission_classes = (AllowAny,)
@@ -50,3 +50,11 @@ class PostsList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class Users(APIView):
+    permission_classes = (AllowAny,)
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)

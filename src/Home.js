@@ -10,14 +10,17 @@ import {
 import { unsetUserlogin } from '../store/authSlice'
 import { logout } from '../features/auth'
 import { Actions } from 'react-native-router-flux'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import Loaders from 'react-native-pure-loaders'
 import { Navbar } from './Navbar'
 import { FlatList } from 'react-native-gesture-handler'
 import { ListItem } from 'react-native-elements/dist/list/ListItem'
 import { Card, FAB } from 'react-native-paper';
+import { getUser } from '../store/userSlice'
+
 
 const Home = () => {
+  const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
   const [postsData, setPostsData] = useState([])
 
@@ -36,9 +39,11 @@ const Home = () => {
 
   useEffect(()=>{
     loadPosts();
-  }, [])
+    dispatch(getUser())
+  }, [dispatch])
+  const users = useSelector((state) => state.user.list)
+  console.log(users[0])
 
-  const dispatch = useDispatch()
   const logoutFromApp = async () => {
     setLoading(true)
     await logout()

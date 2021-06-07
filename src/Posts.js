@@ -17,7 +17,7 @@ const Posts = () => {
   const [content, setContent] = useState("")
 
   const addPost = () => {
-    fetch(GLOBALS.BASE_URL, {
+    fetch(`${GLOBALS.BASE_URL}/api/posts/`, {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json'

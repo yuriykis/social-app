@@ -17,7 +17,7 @@ import { FlatList } from 'react-native-gesture-handler'
 import { ListItem } from 'react-native-elements/dist/list/ListItem'
 import { Card, FAB } from 'react-native-paper';
 import { getUser } from '../store/userSlice'
-
+import GLOBALS from '../globals/Globals'
 
 const Home = () => {
   const dispatch = useDispatch()
@@ -25,7 +25,7 @@ const Home = () => {
   const [postsData, setPostsData] = useState([])
 
   const loadPosts = () => {
-    fetch('http://192.168.1.253:8000/api/posts/', {
+    fetch(`${GLOBALS.BASE_URL}/api/posts/`, {
       method:"GET"
     })
 

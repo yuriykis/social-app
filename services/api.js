@@ -1,7 +1,7 @@
 import * as Axios from 'axios'
 import { getAccessToken } from './tokenService'
+import GLOBALS from '../globals/Globals'
 
-var apiHost = 'http://192.168.56.1:8000'
 
 const authenticationHeader = () => {
   return {
@@ -10,7 +10,7 @@ const authenticationHeader = () => {
 }
 
 const api = Axios.create({
-  baseURL: apiHost,
+  baseURL: GLOBALS.BASE_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'

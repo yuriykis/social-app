@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import GLOBALS from '../globals/Globals'
+
 
 export const getUser = createAsyncThunk(
   'user/getUser',
   async () => {
-    return fetch(`http://192.168.1.253:8000/api/users`).then((res) => res.json())
+    return fetch(`${GLOBALS.BASE_URL}/api/users`).then((res) => res.json())
   }
 )
 

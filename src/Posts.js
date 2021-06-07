@@ -10,13 +10,14 @@ import {
 import { Icon, Header, Avatar, Image, Button } from "react-native-elements";
 import { Actions } from 'react-native-router-flux'
 import { TextInput } from 'react-native-paper'
+import GLOBALS from '../globals/Globals'
 
 const Posts = () => {
   const [title, setTitle] = useState("")
   const [content, setContent] = useState("")
 
   const addPost = () => {
-    fetch('http://192.168.1.253:8000/api/posts/', {
+    fetch(GLOBALS.BASE_URL, {
       method: 'POST',
       headers: {
         'Content-Type' : 'application/json'

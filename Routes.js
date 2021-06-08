@@ -7,6 +7,7 @@ import Register from './src/Register'
 import Posts from './src/Posts'
 import PostsList from './src/PostsList'
 import ProfilesList from './src/ProfilesList'
+import EditProfile from './src/EditProfile'
 
 const Routes = () => (
   <Router>
@@ -47,6 +48,12 @@ const Routes = () => (
         key="profilesList"
         component={ProfilesList}
         title="Profiles"
+        back
+      />
+      <Scene
+        key="editProfile"
+        component={EditProfile}
+        title="Edit Profile"
         back
       />
     </Scene>

@@ -43,6 +43,9 @@ const Home = () => {
   const goToProfilesList = () => {
     Actions.profilesList()
   }
+  const goToEditProfile = () => {
+    Actions.editProfile()
+  }
   if (usersStatus !== 'success') {
     return (
       <View style={styles.container}>
@@ -102,7 +105,7 @@ const Home = () => {
             style = {styles.fabStyle}
             small = {false}
             icon = "plus"
-            onPress = {goToPosts}
+            onPress = {goToEditProfile}
           />
           <Text style={styles.userName}>Edytuj Profil</Text>
           </View>

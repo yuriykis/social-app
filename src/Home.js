@@ -1,48 +1,31 @@
 import React, { useState, useEffect } from 'react'
 import {
-  TouchableOpacity,
   Text,
   View,
   StyleSheet,
   SafeAreaView,
-  Alert
+  ScrollView,
+  Image,
+  TouchableOpacity,
 } from 'react-native'
 import { unsetUserlogin } from '../store/authSlice'
 import { logout } from '../features/auth'
 import { Actions } from 'react-native-router-flux'
 import { useDispatch, useSelector } from 'react-redux'
 import Loaders from 'react-native-pure-loaders'
-import { Navbar } from './Navbar'
-import { FlatList } from 'react-native-gesture-handler'
-import { ListItem } from 'react-native-elements/dist/list/ListItem'
-import { Card, FAB } from 'react-native-paper';
+import { FAB } from 'react-native-paper';
 import { getUser } from '../store/userSlice'
-import GLOBALS from '../globals/Globals'
+import { selectAllUsers } from '../store/userSlice'
 
 const Home = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const [postsData, setPostsData] = useState([])
-
-  const loadPosts = () => {
-    fetch(`${GLOBALS.BASE_URL}/api/posts/`, {
-      method:"GET"
-    })
-
-    .then(resp => resp.json())
-    .then(postsData => {
-      postsData.reverse()
-      setPostsData(postsData)
-    })
-    .catch(error => Alert.alert('error', error))
-  }
+  const users = useSelector(selectAllUsers)
+  const usersStatus = useSelector((state) => state.user.status)
 
   useEffect(()=>{
-    loadPosts();
     dispatch(getUser())
-  }, [dispatch])
-  const users = useSelector((state) => state.user.list)
-  console.log(users[0])
+  },[dispatch])
 
   const logoutFromApp = async () => {
     setLoading(true)
@@ -51,21 +34,16 @@ const Home = () => {
     Actions.main()
     setLoading(false)
   }
-  const goToProfile = () => {
-    Actions.profile()
-  }
   const goToPosts = () => {
     Actions.posts()
   }
-  const renderPost = (item) => {
-    return(
-      <Card style={styles.cardStyle}>
-        <Text style={styles.titleStyle}>{item.title}</Text>
-        <Text style={styles.contentStyle}>{item.content}</Text>
-      </Card>
-    )
+  const goToPostsList = () => {
+    Actions.postsList()
   }
-  if (loading) {
+  const goToProfilesList = () => {
+    Actions.profilesList()
+  }
+  if (usersStatus !== 'success') {
     return (
       <View style={styles.container}>
         <Loaders.Ring color="blue" />
@@ -73,16 +51,62 @@ const Home = () => {
     );
   } else {
     return (
-      <View style={styles.container}>
-          <FlatList
-            style={{flex: 1}}
-            data={postsData}
-            renderItem = {({item}) => {
-              return renderPost(item)
-            }}
-            keyExtractor = {item => `${item.id}`}
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      <ScrollView
+        style={styles.container}
+        contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
+        showsVerticalScrollIndicator={false}>
+        <Image
+          style={styles.userImg}
+          source={{
+            uri: 'https://reactnative.dev/img/tiny_logo.png',
+          }}
+        />
+        <Text style={styles.userName}>{users[0].first_name} {users[1].last_name} </Text>
+        <Text style={styles.aboutUser}>
+
+          
+        </Text>
+        <View style={styles.userInfoWrapper}>
+          <View>
+          <FAB
+            style = {styles.fabStyle}
+            small = {false}
+            icon = "email"
+            onPress = {goToPosts}
           />
-         
+          <Text style={styles.userName}>Wiadomości</Text>
+          </View>
+          <View>
+          <FAB
+            style = {styles.fabStyle}
+            small = {false}
+            icon = "mail"
+            onPress = {goToPostsList}
+          />
+          <Text style={styles.userName}>Posty</Text>
+          </View>
+        </View>
+        <View style={styles.userInfoWrapper}>
+          <View>
+          <FAB
+            style = {styles.fabStyle}
+            small = {false}
+            icon = "instagram"
+            onPress = {goToProfilesList}
+          />
+          <Text style={styles.userName}>Profile</Text>
+          </View>
+          <View>
+          <FAB
+            style = {styles.fabStyle}
+            small = {false}
+            icon = "plus"
+            onPress = {goToPosts}
+          />
+          <Text style={styles.userName}>Edytuj Profil</Text>
+          </View>
+        </View>
         <View style={styles.footer}>
         <TouchableOpacity
           style={{ margin: 10 }}
@@ -90,48 +114,70 @@ const Home = () => {
         >
           <Text>Logout</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{ margin: 10 }}
-          onPress={goToProfile}
-        >
-          <Text>Profile</Text>
-        </TouchableOpacity>
-        <FAB
-          style = {styles.fabStyle}
-          small = {false}
-          icon = "plus"
-          onPress = {goToPosts}
-        />
         </View>
-      </View>
+      </ScrollView>
+    </SafeAreaView>
     );
   }
 }
 const styles = StyleSheet.create({
-  container:{
-    flex: 1,
-    padding: 10,
-  },
   footer: {
     alignItems: 'center',
     justifyContent: 'center'
   },
-  cardStyle:{
-    padding:10,
-    margin:10
-  },
-  titleStyle:{
-    fontSize:20
-  },
-  contentStyle:{
-    fontSize:15
-  },
   fabStyle:{
-    position:'absolute',
-    margin:16,
-    right:0,
-    bottom:0,
-    backgroundColor:'blue'
-  }
+    position:'relative',
+    marginTop:10,
+    backgroundColor:'blue',
+    width: 55,
+  },
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 10,
+  },
+  aboutUser: {
+    fontSize: 12,
+    fontWeight: '600',
+    color: '#666',
+    textAlign: 'center',
+    marginBottom: 10,
+  },
+  userInfoWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    width: '100%',
+    marginVertical: 20,
+  },
+  userInfoItem: {
+    justifyContent: 'center',
+  },
+  userInfoTitle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 5,
+    textAlign: 'center',
+  },
+  userInfoSubTitle: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  addPost: {
+    fontSize: 12,
+    color: '#666',
+    textAlign: 'center',
+  },
+  userImg: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+  },
 })
 export default Home

@@ -1,13 +1,10 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import {
   View,
   StyleSheet,
-  TouchableOpacity,
-  Dimensions,
   ScrollView,
-  Platform,
 } from "react-native";
-import { Icon, Header, Avatar, Image, Button } from "react-native-elements";
+import { Avatar, Button } from "react-native-elements";
 import { Actions } from 'react-native-router-flux'
 import { TextInput } from 'react-native-paper'
 import GLOBALS from '../globals/Globals'
@@ -58,34 +55,6 @@ const Posts = () => {
           />
       </View>
       <View style={{ flex: 1, margin: 30}}>
-          {/* <Icon
-            name="image"
-            type="evilicon"
-            color="#517fa4"
-            containerStyle={styles.icon}
-            size={40}
-          />
-          <Icon
-            name="gif"
-            type="material"
-            color="#517fa4"
-            containerStyle={styles.icon}
-            size={40}
-          />
-          <Icon
-            name="graph-horizontal"
-            type="foundation"
-            color="#517fa4"
-            containerStyle={styles.icon}
-            size={40}
-          />
-          <Icon
-            name="location"
-            type="evilicon"
-            color="#517fa4"
-            containerStyle={styles.icon}
-            size={40}
-          /> */}
           <Button
           title="SUBMIT"
           type="outline"

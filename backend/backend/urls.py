@@ -20,12 +20,15 @@ from rest_framework_simplejwt import views as jwt_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/test', views.Test.as_view()),
     path('api/token/', jwt_views.TokenObtainPairView.as_view(),
          name='token_obtain_pair'),
     path('api/token/refresh/', jwt_views.TokenRefreshView.as_view(),
          name='token_refresh'),
     path('api/register', views.Register.as_view()),
     path('api/posts/', views.PostsList.as_view()),
-    path('api/users/', views.Users.as_view())
+    path('api/users/', views.Users.as_view()),
+    path('api/user/', views.UserView.as_view()),
+    path('api/message/', views.MessageCreateView.as_view()),
+    path('api/message/sent', views.MessageSentView.as_view()),
+    path('api/message/received', views.MessageReceivedView.as_view())
 ]

@@ -1,5 +1,19 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User as MainUser
+
+
+class User(models.Model):
+    user = models.OneToOneField(
+        MainUser,
+        on_delete=models.CASCADE,
+        primary_key=True
+    )
+    age = models.IntegerField(default=0, null=False)
+    gender = models.CharField(max_length=256, null=False, default=None)
+    info = models.TextField(null=False, default=None)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Posts(models.Model):

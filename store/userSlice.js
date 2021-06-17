@@ -1,11 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import GLOBALS from '../globals/Globals'
+import { getAllUsers } from '../services/api'
 
 
 export const getUser = createAsyncThunk(
   'user/getUser',
   async () => {
-    return fetch(`${GLOBALS.BASE_URL}/api/users`).then((res) => res.json())
+      const response = await getAllUsers();
+    return response.data
   }
 )
 

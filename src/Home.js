@@ -65,7 +65,7 @@ const Home = () => {
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
-        <Text style={styles.userName}>{users[0].first_name} {users[1].last_name} </Text>
+        {/* <Text style={styles.userName}>{users[0].first_name} {users[1].last_name} </Text>
         <Text style={styles.aboutUser}>
 
           
@@ -117,7 +117,7 @@ const Home = () => {
         >
           <Text>Logout</Text>
         </TouchableOpacity>
-        </View>
+        </View> */}
       </ScrollView>
     </SafeAreaView>
     );

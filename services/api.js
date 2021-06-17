@@ -27,3 +27,17 @@ export async function loginToTheApplication(login, password) {
 export async function registerInTheApplication(userData) {
   return api.post('api/register', userData)
 }
+
+export async function getHomeUser() {
+  return api.post('api/user')
+}
+export async function getAllUsers() {
+  const token = await getAccessToken()
+  return api.get('api/users', {
+    //...data
+  }, {
+    headers: {
+      'Authorization': `Bearer ${token}` 
+    }
+  }) 
+}

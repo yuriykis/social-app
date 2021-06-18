@@ -2,10 +2,9 @@ import * as Axios from 'axios'
 import { getAccessToken } from './tokenService'
 import GLOBALS from '../globals/Globals'
 
-
-const authenticationHeader = () => {
+const authenticationHeader = async () => {
   return {
-    Authorization: `Bearer ${getAccessToken()}`
+    Authorization: `Bearer ${await getAccessToken()}`
   }
 }
 
@@ -31,13 +30,20 @@ export async function registerInTheApplication(userData) {
 export async function getHomeUser() {
   return api.post('api/user')
 }
+
 export async function getAllUsers() {
-  const token = await getAccessToken()
-  return api.get('api/users', {
-    //...data
-  }, {
-    headers: {
-      'Authorization': `Bearer ${token}` 
-    }
-  }) 
+  return api.get('api/user', {
+    headers: await authenticationHeader()
+  })
 }
+
+// export async function getAllUsers() {
+//   const token = await getAccessToken()
+//   return api.get('api/users', {
+//     //...data
+//   }, {
+//     headers: {
+//       'Authorization': `Bearer ${token}`
+//     }
+//   })
+// }

@@ -38,3 +38,9 @@ export async function getAllUsers() {
     headers: await authenticationHeader()
   })
 }
+
+export async function getElseMessages(senderData) {
+  return api.post('api/message/received', senderData, {
+    headers: await authenticationHeader(),
+  })
+}

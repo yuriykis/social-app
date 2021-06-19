@@ -10,6 +10,7 @@ import ProfilesList from './src/ProfilesList'
 import EditProfile from './src/EditProfile'
 import Conversations from './src/Conversations'
 import Messages from './src/Messages'
+import ReceivedMessages from './src/RecivedMessages'
 
 const Routes = () => (
   <Router>
@@ -68,6 +69,12 @@ const Routes = () => (
         key="messages"
         component={Messages}
         title="messages"
+        back
+      />
+      <Scene
+        key="recivedMessages"
+        component={ReceivedMessages}
+        title="Odebrane"
         back
       />
     </Scene>

@@ -1,31 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   StyleSheet,
   ScrollView,
+  Text
 } from "react-native";
 import { Avatar, Button } from "react-native-elements";
 import { Actions } from 'react-native-router-flux'
 import { TextInput } from 'react-native-paper'
 import GLOBALS from '../globals/Globals'
+import { selectReceivedMessages, getReceivedMessages } from "../store/messageSlice";
+import { useDispatch, useSelector } from 'react-redux'
 
-const Messages = () => {
-  const [title, setTitle] = useState("")
-  const [content, setContent] = useState("")
+const Messages = (props) => {
+  
+    const goToRecivedMessages = (user) => {
+        Actions.recivedMessages({user: user})
+    }
 
-  const addPost = () => {
-    fetch(`${GLOBALS.BASE_URL}/api/posts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type' : 'application/json'
-      },
-      body: JSON.stringify({title, content})
-    })
-    .then(resp => resp.json())
-    .then(data =>{
-      Actions.home()
-    })
-  }
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputContainer}>
@@ -38,29 +30,29 @@ const Messages = () => {
             }}
           />
         </View>
-          <TextInput
-            label = 'title'
-            mode = 'outlined'
-            style={styles.titleStyle}
-            autoFocus={true}
-            onChangeText = {text => setTitle(text)}
-
-          />
-          <TextInput
-            label = 'content'
-            mode = 'outlined'
-            style={styles.contentStyle}
-            onChangeText = {text => setContent(text)}
-
+      </View>
+      <View style={{ flex: 1, margin: 30}}>
+      <Text style={styles.userName}>{props.user.firstName} {props.user.lastName} </Text>
+          <Button
+          title="Nowa wiadomość"
+          type="outline"
+          onPress = {() => {console.log("NOWA")}}
           />
       </View>
       <View style={{ flex: 1, margin: 30}}>
           <Button
-          title="SUBMIT"
+          title="Wysłane"
           type="outline"
-          onPress = {() => addPost()}
+          onPress = {() => {console.log(props)}}
           />
-        </View>
+      </View>
+      <View style={{ flex: 1, margin: 30}}>
+          <Button
+          title="Odebrane"
+          type="outline"
+          onPress = {() => goToRecivedMessages(props.user)}
+          />
+      </View>
     </ScrollView>
   );
 }
@@ -96,5 +88,12 @@ const styles = StyleSheet.create({
   },
   image: {
     aspectRatio: 4 / 5,
+  },
+  userName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginTop: 10,
+    marginBottom: 30,
+    marginLeft:20,
   },
 })

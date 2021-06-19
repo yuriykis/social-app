@@ -14,19 +14,22 @@ import { TouchableOpacity } from 'react-native'
 import { Actions } from 'react-native-router-flux'
 
 
-const ProfilesList = () => {
+const Conversations = () => {
     const dispatch = useDispatch()
     const users = useSelector(selectAllUsers)
     const usersStatus = useSelector((state) => state.user.status)
+    
     useEffect(()=>{
       dispatch(getUser())
     },[dispatch])
-    const goToProfile = (user) => {
-      Actions.profile({user: user})
+
+    const goToMessages = (user) => {
+      Actions.messages({user: user})
     }
-    const renderPost = (item) => {
+
+    const renderConversation = (item) => {
       return(
-        <TouchableOpacity onPress={() => goToProfile(item)}>
+        <TouchableOpacity onPress={() => goToMessages(item)}>
           <Card style={styles.cardStyle}>
             <Text style={styles.titleStyle}>Nick: {item.username}</Text>
             <Text style={styles.contentStyle}>User Name: {item.firstName} {item.lastName}</Text>
@@ -48,7 +51,7 @@ const ProfilesList = () => {
             style={{flex: 1}}
             data={users}
             renderItem = {({item}) => {
-              return renderPost(item)
+              return renderConversation(item)
             }}
             keyExtractor = {item => `${item.id}`}
           />
@@ -72,4 +75,4 @@ const styles = StyleSheet.create({
     fontSize:15
   },
 })
-export default ProfilesList
+export default Conversations

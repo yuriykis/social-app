@@ -14,17 +14,16 @@ import { Actions } from 'react-native-router-flux'
 import { useDispatch, useSelector } from 'react-redux'
 import Loaders from 'react-native-pure-loaders'
 import { FAB } from 'react-native-paper';
-import { getUser } from '../store/userSlice'
-import { selectAllUsers } from '../store/userSlice'
+import { selectSingleUser, getSingleUser } from '../store/singleUserSlice'
 
 const Home = () => {
   const dispatch = useDispatch()
   const [loading, setLoading] = useState(false)
-  const users = useSelector(selectAllUsers)
-  const usersStatus = useSelector((state) => state.user.status)
+  const homeUser = useSelector(selectSingleUser)
+  const singleUsersStatus = useSelector((state) => state.singleUser.status)
 
   useEffect(()=>{
-    dispatch(getUser())
+    dispatch(getSingleUser())
   },[dispatch])
 
   const logoutFromApp = async () => {
@@ -37,6 +36,9 @@ const Home = () => {
   const goToPosts = () => {
     Actions.posts()
   }
+  const goToConversations = () => {
+    Actions.conversations()
+  }
   const goToPostsList = () => {
     Actions.postsList()
   }
@@ -46,7 +48,7 @@ const Home = () => {
   const goToEditProfile = () => {
     Actions.editProfile()
   }
-  if (usersStatus !== 'success') {
+  if (singleUsersStatus !== 'success') {
     return (
       <View style={styles.container}>
         <Loaders.Ring color="blue" />
@@ -65,10 +67,11 @@ const Home = () => {
             uri: 'https://reactnative.dev/img/tiny_logo.png',
           }}
         />
-        {/* <Text style={styles.userName}>{users[0].first_name} {users[1].last_name} </Text>
+        <Text style={styles.userName}>Imię: {homeUser.firstName}</Text>
+        <Text style={styles.userName}>Nazwisko: {homeUser.lastName}</Text>
+        <Text style={styles.userName}>Wiek: {homeUser.age}</Text>
         <Text style={styles.aboutUser}>
-
-          
+          {homeUser.info}
         </Text>
         <View style={styles.userInfoWrapper}>
           <View>
@@ -76,7 +79,7 @@ const Home = () => {
             style = {styles.fabStyle}
             small = {false}
             icon = "email"
-            onPress = {goToPosts}
+            onPress = {goToConversations}
           />
           <Text style={styles.userName}>Wiadomości</Text>
           </View>
@@ -117,7 +120,7 @@ const Home = () => {
         >
           <Text>Logout</Text>
         </TouchableOpacity>
-        </View> */}
+        </View>
       </ScrollView>
     </SafeAreaView>
     );

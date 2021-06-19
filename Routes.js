@@ -8,6 +8,8 @@ import Posts from './src/Posts'
 import PostsList from './src/PostsList'
 import ProfilesList from './src/ProfilesList'
 import EditProfile from './src/EditProfile'
+import Conversations from './src/Conversations'
+import Messages from './src/Messages'
 
 const Routes = () => (
   <Router>
@@ -54,6 +56,18 @@ const Routes = () => (
         key="editProfile"
         component={EditProfile}
         title="Edit Profile"
+        back
+      />
+      <Scene
+        key="conversations"
+        component={Conversations}
+        title="Wiadomości"
+        back
+      />
+      <Scene
+        key="messages"
+        component={Messages}
+        title="messages"
         back
       />
     </Scene>

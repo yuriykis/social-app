@@ -28,22 +28,13 @@ export async function registerInTheApplication(userData) {
 }
 
 export async function getHomeUser() {
-  return api.post('api/user')
-}
-
-export async function getAllUsers() {
   return api.get('api/user', {
     headers: await authenticationHeader()
   })
 }
 
-// export async function getAllUsers() {
-//   const token = await getAccessToken()
-//   return api.get('api/users', {
-//     //...data
-//   }, {
-//     headers: {
-//       'Authorization': `Bearer ${token}`
-//     }
-//   })
-// }
+export async function getAllUsers() {
+  return api.get('api/users', {
+    headers: await authenticationHeader()
+  })
+}

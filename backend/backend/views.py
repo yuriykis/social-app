@@ -40,7 +40,7 @@ class Register(APIView):
 
 
 class PostsList(APIView):
-    permission_classes = (IsAuthenticated,)
+    permission_classes = (AllowAny,)
 
     def get(self, request):
         posts = Posts.objects.all()

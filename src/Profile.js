@@ -14,13 +14,13 @@ const Profile = (props) => {
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
         showsVerticalScrollIndicator={false}>
         <Text style={styles.userName}>Nick: {props.user.username} </Text>
-        <Text style={styles.userName}>{props.user.first_name} {props.user.last_name} </Text>
-        <Text style={styles.userName}>email: {props.user.email} </Text>
-        <Text style={styles.userName}>age:  </Text>
+        <Text style={styles.userName}>{props.user.firstName} {props.user.lastName} </Text>
+        <Text style={styles.userName}>gender: {props.user.gender} </Text>
+        <Text style={styles.userName}>age:  {props.user.age}</Text>
         
         <Text style={styles.aboutUser}>
 
-          About user
+          {props.user.info}
         </Text>
       </ScrollView>
     </SafeAreaView>

@@ -11,6 +11,7 @@ import EditProfile from './src/EditProfile'
 import Conversations from './src/Conversations'
 import Messages from './src/Messages'
 import ReceivedMessages from './src/RecivedMessages'
+import SentMessages from './src/SentMessages'
 
 const Routes = () => (
   <Router>
@@ -35,12 +36,7 @@ const Routes = () => (
         back
       />
       <Scene key="home" component={Home} hideNavBar={true} />
-      <Scene
-        key="posts"
-        component={Posts}
-        title="Add Post"
-        back
-      />
+      <Scene key="posts" component={Posts} title="Add Post" back />
       <Scene
         key="postsList"
         component={PostsList}
@@ -75,6 +71,12 @@ const Routes = () => (
         key="recivedMessages"
         component={ReceivedMessages}
         title="Odebrane"
+        back
+      />
+      <Scene
+        key="sentMessages"
+        component={SentMessages}
+        title="Wysłane"
         back
       />
     </Scene>

@@ -41,6 +41,11 @@ export async function getAllUsers() {
 
 export async function getElseMessages(senderData) {
   return api.post('api/message/received', senderData, {
-    headers: await authenticationHeader(),
+    headers: await authenticationHeader()
+  })
+}
+export async function getOwnMessages(receiverData) {
+  return api.post('api/message/sent', receiverData, {
+    headers: await authenticationHeader()
   })
 }

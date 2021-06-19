@@ -134,7 +134,7 @@ class MessageCreateView(APIView):
 class MessageSentView(APIView):
     permission_classes = (IsAuthenticated,)
 
-    def get(self, request):
+    def post(self, request):
         try:
             main_user_sender = MainUser.objects.get(username=request.user)
             user_sender = User.objects.get(user=main_user_sender)

@@ -5,6 +5,14 @@ import Profile from './src/Profile'
 import Home from './src/Home'
 import Register from './src/Register'
 import Posts from './src/Posts'
+import PostsList from './src/PostsList'
+import ProfilesList from './src/ProfilesList'
+import EditProfile from './src/EditProfile'
+import Conversations from './src/Conversations'
+import Messages from './src/Messages'
+import ReceivedMessages from './src/RecivedMessages'
+import SentMessages from './src/SentMessages'
+import SendMessage from './src/SendMessage'
 
 const Routes = () => (
   <Router>
@@ -29,10 +37,53 @@ const Routes = () => (
         back
       />
       <Scene key="home" component={Home} hideNavBar={true} />
+      <Scene key="posts" component={Posts} title="Add Post" back />
       <Scene
-        key="posts"
-        component={Posts}
-        title="Your Posts"
+        key="postsList"
+        component={PostsList}
+        title="Posts"
+        back
+      />
+      <Scene
+        key="profilesList"
+        component={ProfilesList}
+        title="Profiles"
+        back
+      />
+      <Scene
+        key="editProfile"
+        component={EditProfile}
+        title="Edit Profile"
+        back
+      />
+      <Scene
+        key="conversations"
+        component={Conversations}
+        title="Wiadomości"
+        back
+      />
+      <Scene
+        key="messages"
+        component={Messages}
+        title="messages"
+        back
+      />
+      <Scene
+        key="recivedMessages"
+        component={ReceivedMessages}
+        title="Odebrane"
+        back
+      />
+      <Scene
+        key="sentMessages"
+        component={SentMessages}
+        title="Wysłane"
+        back
+      />
+      <Scene
+        key="sendMessage"
+        component={SendMessage}
+        title="Wyślij wiadomość"
         back
       />
     </Scene>

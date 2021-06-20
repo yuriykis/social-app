@@ -1,16 +1,15 @@
 import * as Axios from 'axios'
 import { getAccessToken } from './tokenService'
+import GLOBALS from '../globals/Globals'
 
-var apiHost = 'http://192.168.56.1:8000'
-
-const authenticationHeader = () => {
+const authenticationHeader = async () => {
   return {
-    Authorization: `Bearer ${getAccessToken()}`
+    Authorization: `Bearer ${await getAccessToken()}`
   }
 }
 
 const api = Axios.create({
-  baseURL: apiHost,
+  baseURL: GLOBALS.BASE_URL,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json'
@@ -26,4 +25,32 @@ export async function loginToTheApplication(login, password) {
 
 export async function registerInTheApplication(userData) {
   return api.post('api/register', userData)
+}
+
+export async function getHomeUser() {
+  return api.get('api/user', {
+    headers: await authenticationHeader()
+  })
+}
+
+export async function getAllUsers() {
+  return api.get('api/users', {
+    headers: await authenticationHeader()
+  })
+}
+
+export async function getElseMessages(senderData) {
+  return api.post('api/message/received', senderData, {
+    headers: await authenticationHeader()
+  })
+}
+export async function getOwnMessages(receiverData) {
+  return api.post('api/message/sent', receiverData, {
+    headers: await authenticationHeader()
+  })
+}
+export async function sendMessage(message) {
+  return api.post('api/message/', message, {
+    headers: await authenticationHeader()
+  })
 }

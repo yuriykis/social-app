@@ -1,56 +1,31 @@
 import React from 'react'
 import {
-  View,
   Text,
-  TouchableOpacity,
-  Image,
   StyleSheet,
-  ScrollView,
   SafeAreaView,
+  ScrollView,
 } from 'react-native'
-import { Actions } from 'react-native-router-flux'
 
-const Profile = () => {
-  const goToPosts = () => {
-    Actions.posts()
-  }
-  return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+const Profile = (props) => {
+    return (
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
       <ScrollView
         style={styles.container}
         contentContainerStyle={{ justifyContent: 'center', alignItems: 'center' }}
         showsVerticalScrollIndicator={false}>
-        <Image
-          style={styles.userImg}
-          source={{
-            uri: 'https://reactnative.dev/img/tiny_logo.png',
-          }}
-        />
-        <Text style={styles.userName}>Robert Nowak</Text>
+        <Text style={styles.userName}>Nick: {props.user.username} </Text>
+        <Text style={styles.userName}>{props.user.firstName} {props.user.lastName} </Text>
+        <Text style={styles.userName}>gender: {props.user.gender} </Text>
+        <Text style={styles.userName}>age:  {props.user.age}</Text>
+        
         <Text style={styles.aboutUser}>
-          {'Cześć! jestem Robert Nowak. Lubię grać w piłkę nożną, interesuję się motoryzacją oraz zbieraniem znaczków pocztowych'}
-        </Text>
-        <View style={styles.userInfoWrapper}>
-          <View style={styles.userInfoItem}>
-            <TouchableOpacity
-              onPress={goToPosts}
-            >
-              <Text style={styles.userInfoTitle}>{1000}</Text>
-              <Text style={styles.userInfoSubTitle}>Posts</Text>
-            </TouchableOpacity>
 
-          </View>
-          <View style={styles.userInfoItem}>
-            <Text style={styles.userInfoTitle}>2</Text>
-            <Text style={styles.userInfoSubTitle}>Friends</Text>
-          </View>
-        </View>
+          {props.user.info}
+        </Text>
       </ScrollView>
     </SafeAreaView>
-  )
-}
-export default Profile
-
+    );
+  }
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -58,13 +33,13 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   userName: {
-    fontSize: 18,
+    fontSize: 30,
     fontWeight: 'bold',
     marginTop: 10,
     marginBottom: 10,
   },
   aboutUser: {
-    fontSize: 12,
+    fontSize: 20,
     fontWeight: '600',
     color: '#666',
     textAlign: 'center',
@@ -90,9 +65,5 @@ const styles = StyleSheet.create({
     color: '#666',
     textAlign: 'center',
   },
-  userImg: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-  },
 })
+export default Profile

@@ -4,23 +4,23 @@ import { Avatar, Button } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux'
 import { TextInput } from 'react-native-paper'
 import GLOBALS from '../globals/Globals'
+import { sendMessage } from '../services/api'
 
-const Posts = () => {
+const SendMessage = (props) => {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
 
-  const addPost = () => {
-    fetch(`${GLOBALS.BASE_URL}/api/posts/`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ title, content })
-    })
-      .then((resp) => resp.json())
-      .then((data) => {
-        Actions.home()
-      })
+  const sendNewMessage = () => {
+    const newMessage = {
+      receiver: props.user.username,
+      send_time: '18/09/19 01:55:19',
+      content: content
+    }
+    sendMessage(newMessage)
+    goToMessages(props.user)
+  }
+  const goToMessages = (user) => {
+    Actions.messages({ user: user })
   }
   return (
     <ScrollView style={styles.container}>
@@ -35,13 +35,6 @@ const Posts = () => {
           />
         </View>
         <TextInput
-          label="title"
-          mode="outlined"
-          style={styles.titleStyle}
-          autoFocus={true}
-          onChangeText={(text) => setTitle(text)}
-        />
-        <TextInput
           label="content"
           mode="outlined"
           style={styles.contentStyle}
@@ -50,15 +43,15 @@ const Posts = () => {
       </View>
       <View style={{ flex: 1, margin: 30 }}>
         <Button
-          title="SUBMIT"
+          title="Wyślij"
           type="outline"
-          onPress={() => addPost()}
+          onPress={() => sendNewMessage()}
         />
       </View>
     </ScrollView>
   )
 }
-export default Posts
+export default SendMessage
 
 const styles = StyleSheet.create({
   container: { flex: 1 },

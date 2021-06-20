@@ -23,6 +23,7 @@ const Register = ({ onSubmit }) => {
   const [lastName, setLastName] = useState('')
   const [age, setAge] = useState('')
   const [gender, setGender] = useState('')
+  const [info, setInfo] = useState('')
 
   const [loading, setLoading] = useState(false)
 
@@ -33,7 +34,9 @@ const Register = ({ onSubmit }) => {
       password.trim() &&
       retypePassword.trim() &&
       firstName.trim() &&
-      lastName.trim()
+      lastName.trim() &&
+      age.trim() &&
+      gender.trim()
     ) {
       // onSubmit(value)
       if (password !== retypePassword) {
@@ -47,7 +50,8 @@ const Register = ({ onSubmit }) => {
         firstName,
         lastName,
         age,
-        gender
+        gender,
+        info
       })
       if (registerOk) {
         Actions.main()

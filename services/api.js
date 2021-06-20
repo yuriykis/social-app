@@ -49,3 +49,8 @@ export async function getOwnMessages(receiverData) {
     headers: await authenticationHeader()
   })
 }
+export async function sendMessage(message) {
+  return api.post('api/message/', message, {
+    headers: await authenticationHeader()
+  })
+}

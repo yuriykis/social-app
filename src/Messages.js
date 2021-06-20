@@ -15,8 +15,10 @@ const Messages = (props) => {
     Actions.recivedMessages({ user: user })
   }
   const goToSentMessages = (user) => {
-    console.log('goToSentMessages')
     Actions.sentMessages({ user: user })
+  }
+  const goToSendMessage = (user) => {
+    Actions.sendMessage({ user: user })
   }
 
   return (
@@ -39,9 +41,7 @@ const Messages = (props) => {
         <Button
           title="Nowa wiadomość"
           type="outline"
-          onPress={() => {
-            console.log('NOWA')
-          }}
+          onPress={() => goToSendMessage(props.user)}
         />
       </View>
       <View style={{ flex: 1, margin: 30 }}>

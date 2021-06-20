@@ -12,6 +12,7 @@ import Conversations from './src/Conversations'
 import Messages from './src/Messages'
 import ReceivedMessages from './src/RecivedMessages'
 import SentMessages from './src/SentMessages'
+import SendMessage from './src/SendMessage'
 
 const Routes = () => (
   <Router>
@@ -77,6 +78,12 @@ const Routes = () => (
         key="sentMessages"
         component={SentMessages}
         title="Wysłane"
+        back
+      />
+      <Scene
+        key="sendMessage"
+        component={SendMessage}
+        title="Wyślij wiadomość"
         back
       />
     </Scene>

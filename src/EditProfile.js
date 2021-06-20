@@ -26,44 +26,43 @@ const EditProfile = () => {
 
   const [loading, setLoading] = useState(false)
   const [showPassowrd, togglePassword] = useState(false)
-  
+
   const togglePasswordInputs = () => {
-      console.log(showPassowrd)
-      togglePassword(!showPassowrd)
+    togglePassword(!showPassowrd)
   }
-//   const submitUserData = async () => {
-//     setLoading(true)
-//     if (
-//       username.trim() &&
-//       password.trim() &&
-//       retypePassword.trim() &&
-//       firstName.trim() &&
-//       lastName.trim()
-//     ) {
-//       // onSubmit(value)
-//       if (password !== retypePassword) {
-//         Alert.alert('Passwords not matched')
-//         setLoading(false)
-//         return
-//       }
-//       const registerOk = await register({
-//         username,
-//         password,
-//         firstName,
-//         lastName,
-//         age,
-//         gender
-//       })
-//       if (registerOk) {
-//         Actions.main()
-//       } else {
-//         Alert.alert('Registration failed. Please try again')
-//       }
-//     } else {
-//       Alert.alert('User data cannot be empty')
-//     }
-//     setLoading(false)
-//   }
+  //   const submitUserData = async () => {
+  //     setLoading(true)
+  //     if (
+  //       username.trim() &&
+  //       password.trim() &&
+  //       retypePassword.trim() &&
+  //       firstName.trim() &&
+  //       lastName.trim()
+  //     ) {
+  //       // onSubmit(value)
+  //       if (password !== retypePassword) {
+  //         Alert.alert('Passwords not matched')
+  //         setLoading(false)
+  //         return
+  //       }
+  //       const registerOk = await register({
+  //         username,
+  //         password,
+  //         firstName,
+  //         lastName,
+  //         age,
+  //         gender
+  //       })
+  //       if (registerOk) {
+  //         Actions.main()
+  //       } else {
+  //         Alert.alert('Registration failed. Please try again')
+  //       }
+  //     } else {
+  //       Alert.alert('User data cannot be empty')
+  //     }
+  //     setLoading(false)
+  //   }
 
   if (loading) {
     return (
@@ -105,47 +104,43 @@ const EditProfile = () => {
             onPress={togglePasswordInputs}
           />
           <View>
-              {
-              showPassowrd ? 
+            {showPassowrd ? (
               <View>
-               <Button
-                title={'Save New Password'}
-                style={styles.input}
-                onPress={togglePasswordInputs}
-               />
+                <Button
+                  title={'Save New Password'}
+                  style={styles.input}
+                  onPress={togglePasswordInputs}
+                />
               </View>
-               : 
-               <Button
+            ) : (
+              <Button
                 title={'Change Password'}
                 style={styles.input}
                 onPress={togglePasswordInputs}
               />
-              }
+            )}
           </View>
           <View>
-              {
-              showPassowrd ? 
+            {showPassowrd ? (
               <View>
-                  <TextInput
-                    value={password}
-                    onChangeText={setPassword}
-                    placeholder={'Password'}
-                    secureTextEntry={true}
-                    style={styles.input}
-                  />
-                  <TextInput
-                    value={retypePassword}
-                    onChangeText={setRetypePassword}
-                    placeholder={'Retype Password'}
-                    secureTextEntry={true}
-                    style={styles.input}
-                  />
+                <TextInput
+                  value={password}
+                  onChangeText={setPassword}
+                  placeholder={'Password'}
+                  secureTextEntry={true}
+                  style={styles.input}
+                />
+                <TextInput
+                  value={retypePassword}
+                  onChangeText={setRetypePassword}
+                  placeholder={'Retype Password'}
+                  secureTextEntry={true}
+                  style={styles.input}
+                />
               </View>
-               : 
-              <Text>
-
-              </Text>
-              }
+            ) : (
+              <Text></Text>
+            )}
           </View>
         </View>
       </ScrollView>

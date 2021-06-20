@@ -20,7 +20,6 @@ const SentMessages = (props) => {
     const data = {
       receiver: props.user.username
     }
-    console.log(data)
     dispatch(getSentMessages(data))
   }, [dispatch])
 
